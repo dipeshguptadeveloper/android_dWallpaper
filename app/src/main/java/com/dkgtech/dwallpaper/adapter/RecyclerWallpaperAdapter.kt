@@ -7,17 +7,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dkgtech.dwallpaper.databinding.FragmentHomeBinding
+import com.dkgtech.dwallpaper.databinding.SearchWallpaperRowBinding
 import com.dkgtech.dwallpaper.databinding.WallpaperRowBinding
 import com.dkgtech.dwallpaper.model.PhotosModel
 
 class RecyclerWallpaperAdapter(val context: Context, val listPhotos: List<PhotosModel>) :
     RecyclerView.Adapter<RecyclerWallpaperAdapter.ViewHolder>() {
-    class ViewHolder(val binding: WallpaperRowBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: SearchWallpaperRowBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(WallpaperRowBinding.inflate(LayoutInflater.from(context), parent, false))
+        return ViewHolder(
+            SearchWallpaperRowBinding.inflate(
+                LayoutInflater.from(context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {

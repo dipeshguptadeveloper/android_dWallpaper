@@ -1,5 +1,6 @@
 package com.dkgtech.dwallpaper.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +12,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dkgtech.dwallpaper.R
+import com.dkgtech.dwallpaper.SearchWallpaperActivity
 import com.dkgtech.dwallpaper.adapter.RecyclerCategoryAdapter
 import com.dkgtech.dwallpaper.adapter.RecyclerColorAdapter
 import com.dkgtech.dwallpaper.adapter.RecyclerCuratedWallpaperAdapter
+import com.dkgtech.dwallpaper.adapter.RecyclerWallpaperAdapter
 import com.dkgtech.dwallpaper.api.ApiHelper
 import com.dkgtech.dwallpaper.databinding.FragmentHomeBinding
 import com.dkgtech.dwallpaper.model.CategoryModel
@@ -26,6 +29,8 @@ class HomeFragment() : Fragment() {
     private var _binding: FragmentHomeBinding? = null
 
     lateinit var homeViewModel: HomeViewModel
+
+    lateinit var searchWallpaperActivity: SearchWallpaperActivity
 
     val arrColors = ArrayList<ColorModel>()
 
@@ -94,15 +99,25 @@ class HomeFragment() : Fragment() {
 
             )
 
-            btnSearch.setOnClickListener {
-                val mQuery = edtSearch.text.toString()
-                query = mQuery
-                homeViewModel.getSearchWallpaper(
-                    "rAwzTmcXYsSfCf6C5uUThO0izNTor82oYH3S78hab8COjw9IpYCC6FA3",
-                    query,
-                    80, ""
-                )
+            txtSearchWallpaper.setOnClickListener {
+                startActivity(Intent(activity, SearchWallpaperActivity::class.java))
             }
+
+
+            /*btnSearch.setOnClickListener {
+                val mQuery = edtSearch.text.toString()
+                if (mQuery != "") {
+                    startActivity(Intent(activity, SearchWallpaperActivity::class.java))
+                    query = mQuery
+                    homeViewModel.getSearchWallpaper(
+                        "rAwzTmcXYsSfCf6C5uUThO0izNTor82oYH3S78hab8COjw9IpYCC6FA3",
+                        query,
+                        80, ""
+                    )
+                } else {
+                    Toast.makeText(activity, "Enter Search Keyword", Toast.LENGTH_SHORT).show()
+                }
+            }*/
 
             homeViewModel.curatedListPhotos.observe(viewLifecycleOwner) { photos ->
                 rcViewWallpaper.adapter = RecyclerCuratedWallpaperAdapter(requireContext(), photos)
