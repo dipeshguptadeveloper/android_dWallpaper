@@ -15,7 +15,8 @@ interface ApiHelper {
     fun getSearchWallpaper(
         @Header("Authorization") auth: String,
         @Query("query") query: String,
-        @Query("per_page") per_page: Int
+        @Query("per_page") per_page: Int,
+        @Query("color") colorHex: String
     ): Call<WallpaperModel>
 
     @GET("curated")

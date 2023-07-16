@@ -3,24 +3,23 @@ package com.dkgtech.dwallpaper.ui.home
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dkgtech.dwallpaper.repo.WallpaperRepository
 import com.dkgtech.dwallpaper.model.CuratedWallpaperModel
 import com.dkgtech.dwallpaper.model.Photos
 import com.dkgtech.dwallpaper.model.PhotosModel
 import com.dkgtech.dwallpaper.model.WallpaperModel
+import com.dkgtech.dwallpaper.repo.WallpaperRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel (val wallpaperRepository: WallpaperRepository) : ViewModel() {
+class HomeViewModel(val wallpaperRepository: WallpaperRepository) : ViewModel() {
 
     val listPhotos = MutableLiveData<List<PhotosModel>>()
     val curatedListPhotos = MutableLiveData<List<Photos>>()
     val errMsg = MutableLiveData<String>()
 
-    fun getSearchWallpaper(auth: String, search: String, perPage: Int) {
-
-        wallpaperRepository.getSearchWallpaper(auth, search, perPage)
+    fun getSearchWallpaper(auth: String, search: String, perPage: Int, colorHex: String) {
+        wallpaperRepository.getSearchWallpaper(auth, search, perPage, colorHex)
             .enqueue(object : Callback<WallpaperModel> {
                 override fun onResponse(
                     call: Call<WallpaperModel>?,
@@ -28,22 +27,14 @@ class HomeViewModel (val wallpaperRepository: WallpaperRepository) : ViewModel()
                 ) {
                     if (response?.code() == 200) {
                         listPhotos.postValue(response.body()!!.photosModel)
-                        Log.d("Response", response.body().toString())
                     } else {
-                        Log.d("Error", "${response?.errorBody()}, ${response?.code()}")
-                        errMsg.postValue(
-                            "Error : ${
-                                response?.errorBody()
-                            },${
-                                response?.code()
-                            }"
-                        )
+                        errMsg.postValue("Error : ${response?.errorBody()},${response?.code()}")
                     }
                 }
 
                 override fun onFailure(call: Call<WallpaperModel>?, t: Throwable?) {
-                    Log.d("Network Error", "${t?.message}")
                     t?.printStackTrace()
+                    Log.d("Network Error", "${t?.message}")
                     errMsg.postValue("Network Error : ${t?.message}")
                 }
 

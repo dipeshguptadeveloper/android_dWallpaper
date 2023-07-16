@@ -7,8 +7,13 @@ import retrofit2.Call
 
 class WallpaperRepository(val apiHelper: ApiHelper) {
 
-    fun getSearchWallpaper(auth: String, search: String, perPage: Int): Call<WallpaperModel> {
-        return apiHelper.getSearchWallpaper(auth, query = search, per_page = perPage)
+    fun getSearchWallpaper(
+        auth: String,
+        search: String,
+        perPage: Int,
+        colorHex: String
+    ): Call<WallpaperModel> {
+        return apiHelper.getSearchWallpaper(auth, query = search, per_page = perPage,colorHex)
     }
 
     fun getCuratedWallpaper(auth: String, perPage: Int): Call<CuratedWallpaperModel> {
