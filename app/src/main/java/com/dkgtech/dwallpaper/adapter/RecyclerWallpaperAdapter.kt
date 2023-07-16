@@ -1,11 +1,14 @@
 package com.dkgtech.dwallpaper.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.dkgtech.dwallpaper.FullScreenWallpaperActivity
+import com.dkgtech.dwallpaper.SearchWallpaperActivity
 import com.dkgtech.dwallpaper.databinding.FragmentHomeBinding
 import com.dkgtech.dwallpaper.databinding.SearchWallpaperRowBinding
 import com.dkgtech.dwallpaper.databinding.WallpaperRowBinding
@@ -36,6 +39,18 @@ class RecyclerWallpaperAdapter(val context: Context, val listPhotos: List<Photos
         with(holder.binding) {
             Glide.with(context).load(Uri.parse(listPhotos[position].srcModel!!.portrait))
                 .into(imgSrc)
+
+            imgSrc.setOnClickListener {
+                context.startActivity(
+                    Intent(
+                        context,
+                        FullScreenWallpaperActivity::class.java
+                    ).putExtra(
+                        SearchWallpaperActivity.IMAGE_KEY,
+                        listPhotos[position].srcModel!!.portrait
+                    )
+                )
+            }
         }
     }
 }

@@ -6,4 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".FullScreenWallpaperActivity">
 
+    <ImageView
+        android:id="@+id/imgFullWallpaper"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:background="@drawable/search_bg"
+            android:id="@+id/btnSet"
+            android:textAllCaps="false"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Set" />
+
+        <Button
+            android:background="@drawable/search_bg"
+            android:textAllCaps="false"
+            android:id="@+id/btnDownload"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Download" />
+
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

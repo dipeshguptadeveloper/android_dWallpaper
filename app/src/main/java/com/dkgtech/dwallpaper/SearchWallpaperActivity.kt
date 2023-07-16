@@ -21,6 +21,10 @@ class SearchWallpaperActivity : AppCompatActivity() {
 
     var query = "nature"
 
+    companion object {
+        val IMAGE_KEY = "imageUrl"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchWallpaperBinding.inflate(layoutInflater)
