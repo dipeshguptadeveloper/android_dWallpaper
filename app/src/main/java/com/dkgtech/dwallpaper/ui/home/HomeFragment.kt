@@ -62,6 +62,10 @@ class HomeFragment() : Fragment() {
             add(CategoryModel("Nature", R.drawable.cat_nature))
             add(CategoryModel("Minimal", R.drawable.cat_minimal))
             add(CategoryModel("Technology", R.drawable.cat_technology))
+            add(CategoryModel("Universe", R.drawable.cat_universe))
+            add(CategoryModel("Business", R.drawable.cat_business))
+            add(CategoryModel("Beautiful", R.drawable.cat_beautiful))
+
         }
 
         val apiHelper = ApiHelper.create()
