@@ -37,9 +37,22 @@ class SearchWallpaperActivity : AppCompatActivity() {
         homeViewModel =
             ViewModelProvider(this, HomeViewModelFactory(repo))[HomeViewModel::class.java]
 
+
+
         with(binding) {
 
+            homeViewModel.getSearchWallpaper(
+                "rAwzTmcXYsSfCf6C5uUThO0izNTor82oYH3S78hab8COjw9IpYCC6FA3",
+                "nature",
+                30, ""
+            )
+
             rcViewSearchWallpaper.layoutManager = GridLayoutManager(this@SearchWallpaperActivity, 2)
+
+            homeViewModel.listPhotos.observe(this@SearchWallpaperActivity) { photos ->
+                rcViewSearchWallpaper.adapter =
+                    RecyclerWallpaperAdapter(this@SearchWallpaperActivity, photos)
+            }
 
             btnSearch.setOnClickListener {
                 val mQuery = edtSearch.text.toString()
